@@ -1,0 +1,79 @@
+﻿@page
+@model Portal.Pages.Account.LoginModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login | Simple App Test</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</head>
+
+<body class="body">
+    <div class="container">
+        <div class="row">
+            <form id="loginForm" method="post" class="col-md-4 mx-auto">
+                <div class="text-center mt-5" style="font-size: 20px;">
+                    Simple App Test
+                </div>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="accordion">
+                    <div class="form-group">
+                        <label asp-for="Username"></label>
+                        <input asp-for="Username" class="form-control" autocomplete="off" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password"></label>
+                        <input asp-for="Password" class="form-control" autocomplete="off" />
+                        <div class="invalid-feedback" style="margin-top: 0; font-size: 16px;">
+                            The Password field is required.
+                        </div>
+                    </div>
+                    <div class="form-group text-center mt-2">
+                        <button id="loginSAT" type="submit" class="btn btn-outline-info">Log in</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <partial name="_ValidationScriptsPartial" />
+    <style>
+        .form-control.is-invalid, .was-validated .form-control:invalid {
+            background-image: none;
+            border-color: #ced4da;
+        }
+    </style>
+
+    <script>
+        $(function () {
+            $('#loginSAT').on('click', function () {
+                let $password = $('#Password');
+                $password.removeClass('is-invalid');
+                let password = $password.val();
+
+                if (!password) {
+                    $password.addClass('is-invalid');
+                }
+
+                $('#loginForm').validate();
+                if (($('#loginForm').valid() === false) || !password)
+                    return false;
+
+                return true;
+            });
+        });
+    </script>
+</body>
+</html>

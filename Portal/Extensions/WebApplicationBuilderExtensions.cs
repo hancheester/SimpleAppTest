@@ -1,9 +1,16 @@
-﻿namespace Portal.Extensions;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+
+namespace Portal.Extensions;
 
 public static class WebApplicationBuilderExtensions
 {
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
+        builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                        .AddCookie();
+
+        builder.Services.AddAuthorization();
+
         builder.Services.AddRazorPages();
 
         return builder.Build();
@@ -24,9 +31,11 @@ public static class WebApplicationBuilderExtensions
 
         app.UseRouting();
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
-        app.MapRazorPages();
+        app.MapRazorPages()
+           .RequireAuthorization();
 
         return app;
     }
