@@ -12,5 +12,6 @@ I'm currently in the process of writing a [series of blog articles](https://code
 - [Introduction To Smoke Testing](https://codecultivation.com/why-and-what-is-smoke-testing)
 - [Our first ASP.NET Core project](https://codecultivation.com/new-aspnet-core-project-for-smoke-test)
 - [Implementing Basic Authentication in Razor Pages Without a Database](https://codecultivation.com/implementing-basic-authentication-in-razor-pages-without-a-database)
+- [UI for Organizations (Tenants)](https://codecultivation.com//ui-for-organizations-tenants)
 
 Stay tuned for more articles in this [series](https://codecultivation.com/series/simple-app-test-project) as we continue to build and enhance this project. Your feedback and suggestions are always welcome!
