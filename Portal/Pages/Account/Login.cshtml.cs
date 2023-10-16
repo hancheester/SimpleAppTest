@@ -47,7 +47,7 @@ public class LoginModel : PageModel
 
         if (ModelState.IsValid)
         {
-            var user = _configuration.GetSection("User").Get<User>();
+            var user = _configuration.GetSection("User").Get<UserViewModel>();
             var verificationResult = Username == user.Username && VerifyPassword(Password, user.Password, user.Salt);
 
             if (verificationResult)
