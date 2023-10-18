@@ -17,19 +17,19 @@ public class LoginModel : PageModel
     private readonly IConfiguration _configuration;
 
     [TempData]
-    public string ErrorMessage { get; set; }
-    public string ReturnUrl { get; set; }
+    public string? ErrorMessage { get; set; }
+    public string? ReturnUrl { get; set; }
     [BindProperty, Required]
-    public string Username { get; set; }
+    public string? Username { get; set; }
     [BindProperty, DataType(DataType.Password)]
-    public string Password { get; set; }
+    public string? Password { get; set; }
 
     public LoginModel(IConfiguration configuration)
     {
         _configuration = configuration;
     }
 
-    public void OnGet(string returnUrl = null)
+    public void OnGet(string? returnUrl = null)
     {
         if (!string.IsNullOrEmpty(ErrorMessage))
         {
@@ -41,20 +41,20 @@ public class LoginModel : PageModel
         ReturnUrl = returnUrl;
     }
 
-    public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+    public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
     {
         returnUrl = returnUrl ?? Url.Content("~/");
 
         if (ModelState.IsValid)
         {
             var user = _configuration.GetSection("User").Get<UserViewModel>();
-            var verificationResult = Username == user.Username && VerifyPassword(Password, user.Password, user.Salt);
+            var verificationResult = Username == user.Username && VerifyPassword(Password!, user.Password!, user.Salt!);
 
             if (verificationResult)
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, Username)
+                    new Claim(ClaimTypes.Name, Username!)
                 };
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
@@ -64,7 +64,9 @@ public class LoginModel : PageModel
 
             ModelState.AddModelError(string.Empty, "Invalid login attempt.");
         }
-        HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        
         // If we got this far, something failed, redisplay form
         return Page();
     }

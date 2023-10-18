@@ -8,10 +8,18 @@
     <h1 class="h2">@ViewData["Title"]</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Add</button>
+            <a class="btn btn-sm btn-outline-secondary" asp-page="Add">Add</a>
         </div>
     </div>
 </div>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        @TempData["Message"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
 
 <table class="table">
     <thead>
@@ -26,10 +34,10 @@
             <tr>
                 <td>@organization.Name</td>
                 <td>
-                    <a class="btn btn-outline-secondary">
+                    <a class="btn btn-outline-secondary" asp-page="Edit" asp-route-id="@organization.Id">
                         Edit
                     </a>
-                    <a class="btn btn-outline-info">
+                    <a class="btn btn-outline-info" asp-page="Delete" asp-page-handler="Delete" asp-route-id="@organization.Id" onclick="return confirm('Are you sure?')">
                         Delete
                     </a>
                 </td>

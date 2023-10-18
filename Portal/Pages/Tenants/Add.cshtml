@@ -1,0 +1,41 @@
+﻿@page
+@model AddModel
+@{
+    ViewData["Title"] = "Add Tenant";
+}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">@ViewData["Title"]</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <a class="btn btn-sm btn-outline-secondary" asp-page="Index">Back</a>
+        </div>
+    </div>
+</div>
+
+<form id="addOrgForm" method="post">
+    <div class="mb-3 col-4">
+        <label asp-for="Organization.Name">Name</label>
+        <input class="form-control" asp-for="Organization.Name">
+        <span asp-validation-for="Organization.Name" class="text-danger"></span>
+    </div>
+    <div class="col-6 text-right">
+        <input id="addOrg" type="submit" class="btn btn-sm btn-outline-primary" value="Save" />
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(function () {
+            $('#addOrg').on('click', function () {
+                $('#addOrgForm').validate();
+                if (($('#addOrgForm').valid() === false)
+                        return false;
+
+                return true;
+            });
+        });
+    </script>
+}

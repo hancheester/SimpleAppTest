@@ -5,24 +5,22 @@ namespace Portal.Pages.Tenants;
 
 public class IndexModel : PageModel
 {
-    public List<OrganizationViewModel> Organizations { get; set; } = new();
+    public List<OrganizationViewModel> Organizations { get; set; } = OrganizationsData;
 
-    public void OnGet()
+    public static List<OrganizationViewModel> OrganizationsData = new()
     {
-        Organizations = new List<OrganizationViewModel>
+        new OrganizationViewModel
         {
-            new OrganizationViewModel
-            {
-                Id = 1,
-                Identifier = Guid.NewGuid(),
-                Name = "Acme"
-            },
-            new OrganizationViewModel
-            {
-                Id = 2,
-                Identifier = Guid.NewGuid(),
-                Name = "Contoso"
-            }
-        };
-    }
+            Id = 1,
+            Identifier = Guid.NewGuid(),
+            Name = "Acme"
+        },
+        new OrganizationViewModel
+        {
+            Id = 2,
+            Identifier = Guid.NewGuid(),
+            Name = "Contoso"
+        }
+    };
 }
+
