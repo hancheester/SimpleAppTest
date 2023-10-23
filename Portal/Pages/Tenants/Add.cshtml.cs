@@ -1,13 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Portal.DataAccess;
 using Portal.Models;
 
 namespace Portal.Pages.Tenants;
 
 public class AddModel : PageModel
 {
+    private readonly ApplicationDbContext _context;
+
     [BindProperty]
     public AddOrganizationViewModel Organization { get; set; } = new();
+
+    public AddModel(ApplicationDbContext context)
+    {
+        _context = context;
+    }
 
     public IActionResult OnPost()
     {
@@ -16,16 +24,14 @@ public class AddModel : PageModel
             return Page();
         }
 
-        var organization = new OrganizationViewModel
+        _context.Tenants.Add(new Entities.Tenant
         {
-            Id = IndexModel.OrganizationsData.Count + 1,
             Identifier = Guid.NewGuid(),
-            Name = Organization.Name!
-        };
+            Name = Organization.Name,
+        });
+        _context.SaveChanges();
 
-        IndexModel.OrganizationsData.Add(organization);
-
-        TempData["Message"] = $"Organization {organization.Name} added successfully.";
+        TempData["Message"] = $"Organization {Organization.Name} added successfully.";
 
         return RedirectToPage("Index");
     }

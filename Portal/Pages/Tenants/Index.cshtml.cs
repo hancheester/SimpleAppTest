@@ -1,26 +1,29 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using Portal.DataAccess;
 using Portal.Models;
 
 namespace Portal.Pages.Tenants;
 
 public class IndexModel : PageModel
 {
-    public List<OrganizationViewModel> Organizations { get; set; } = OrganizationsData;
+    private readonly ApplicationDbContext _context;
 
-    public static List<OrganizationViewModel> OrganizationsData = new()
+    public List<OrganizationViewModel> Organizations { get; set; } = new();
+
+    public IndexModel(ApplicationDbContext context)
     {
-        new OrganizationViewModel
-        {
-            Id = 1,
-            Identifier = Guid.NewGuid(),
-            Name = "Acme"
-        },
-        new OrganizationViewModel
-        {
-            Id = 2,
-            Identifier = Guid.NewGuid(),
-            Name = "Contoso"
-        }
-    };
-}
+        _context = context!;
+    }
 
+    public async Task OnGetAsync()
+    {
+        Organizations = await _context.Tenants.Select(o => new OrganizationViewModel
+        {
+            Id = o.Id,
+            Identifier = o.Identifier,
+            Name = o.Name
+        })
+        .ToListAsync();
+    }
+}

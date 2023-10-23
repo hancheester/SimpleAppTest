@@ -14,5 +14,6 @@ I'm currently in the process of writing a [series of blog articles](https://code
 - [Implementing Basic Authentication in Razor Pages Without a Database](https://codecultivation.com/implementing-basic-authentication-in-razor-pages-without-a-database)
 - [UI for Organizations (Tenants)](https://codecultivation.com/ui-for-organizations-tenants)
 - [Actions for Organizations (Tenants)](https://codecultivation.com/actions-for-tenants)
+- [Persisting with Entity Framework Core](https://codecultivation.com/persisting-with-entity-framework-core)
 
 Stay tuned for more articles in this [series](https://codecultivation.com/series/simple-app-test-project) as we continue to build and enhance this project. Your feedback and suggestions are always welcome!
