@@ -1,7 +1,7 @@
 ﻿@page
 @model AddModel
 @{
-    ViewData["Title"] = "Add Tenant";
+    ViewData["Title"] = "Add Application";
 }
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -13,14 +13,14 @@
     </div>
 </div>
 
-<form id="addOrgForm" method="post">
+<form id="addAppForm" method="post">
     <div class="mb-3 col-4">
-        <label asp-for="Organization.Name">Name</label>
-        <input class="form-control" asp-for="Organization.Name">
-        <span asp-validation-for="Organization.Name" class="text-danger"></span>
+        <label asp-for="Application.Name">Name</label>
+        <input class="form-control" asp-for="Application.Name">
+        <span asp-validation-for="Application.Name" class="text-danger"></span>
     </div>
     <div class="col-6 text-right">
-        <input id="addOrg" type="submit" class="btn btn-sm btn-outline-primary" value="Save" />
+        <input id="addApp" type="submit" class="btn btn-sm btn-outline-primary" value="Save" />
     </div>
 </form>
 
@@ -29,9 +29,9 @@
 
     <script>
         $(function () {
-            $('#addOrg').on('click', function () {
-                $('#addOrgForm').validate();
-                if (($('#addOrgForm').valid() === false)
+            $('#addApp').on('click', function () {
+                $('#addAppForm').validate();
+                if (($('#addAppForm').valid() === false)
                     return false;
 
                 return true;

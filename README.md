@@ -15,5 +15,6 @@ I'm currently in the process of writing a [series of blog articles](https://code
 - [UI for Organizations (Tenants)](https://codecultivation.com/ui-for-organizations-tenants)
 - [Actions for Organizations (Tenants)](https://codecultivation.com/actions-for-tenants)
 - [Persisting with Entity Framework Core](https://codecultivation.com/persisting-with-entity-framework-core)
+- [Create, Update, Read and Delete for Applications (CRUD)](https://codecultivation.com/create-update-read-and-delete-for-applications-crud)
 
 Stay tuned for more articles in this [series](https://codecultivation.com/series/simple-app-test-project) as we continue to build and enhance this project. Your feedback and suggestions are always welcome!

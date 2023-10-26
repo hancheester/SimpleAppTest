@@ -2,7 +2,7 @@
 
 namespace Portal.Models;
 
-public class EditOrganizationViewModel
+public class EditApplicationViewModel
 {
     [Required]
     public int Id { get; set; }

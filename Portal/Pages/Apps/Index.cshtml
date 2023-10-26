@@ -1,0 +1,47 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Applications";
+}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">@ViewData["Title"]</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <a class="btn btn-sm btn-outline-secondary" asp-page="Add">Add</a>
+        </div>
+    </div>
+</div>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        @TempData["Message"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var app in Model.Applications)
+        {
+            <tr>
+                <td>@app.Name</td>
+                <td>
+                    <a class="btn btn-outline-secondary" asp-page="Edit" asp-route-id="@app.Id">
+                        Edit
+                    </a>
+                    <a class="btn btn-outline-info" asp-page="Delete" asp-page-handler="Delete" asp-route-id="@app.Id" onclick="return confirm('Are you sure?')">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

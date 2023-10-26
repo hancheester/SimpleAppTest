@@ -1,8 +1,7 @@
 ﻿namespace Portal.Models;
 
-public class OrganizationViewModel
+public class ApplicationViewModel
 {
     public int Id { get; set; }
-    public Guid Identifier { get; set; }
     public string? Name { get; set; }
 }

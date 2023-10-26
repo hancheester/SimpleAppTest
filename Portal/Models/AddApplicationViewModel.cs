@@ -2,11 +2,8 @@
 
 namespace Portal.Models;
 
-public class EditOrganizationViewModel
+public class AddApplicationViewModel
 {
-    [Required]
-    public int Id { get; set; }
-
     [Required]
     public string? Name { get; set; }
 }

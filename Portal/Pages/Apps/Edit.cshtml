@@ -1,0 +1,42 @@
+﻿@page "{id:int}"
+@model EditModel
+@{
+    ViewData["Title"] = "Edit Application";
+}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">@ViewData["Title"]</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <a class="btn btn-sm btn-outline-secondary" asp-page="Index">Back</a>
+        </div>
+    </div>
+</div>
+
+<form id="editAppForm" method="post">
+    <div class="mb-3 col-4">
+        <label asp-for="Application.Name">Name</label>
+        <input class="form-control" asp-for="Application.Name">
+        <span asp-validation-for="Application.Name" class="text-danger"></span>
+    </div>
+    <div class="col-6 text-right">
+        <input id="saveApp" type="submit" class="btn btn-sm btn-outline-primary" value="Save" />
+        <a class="btn btn-sm btn-outline-secondary" asp-page="Delete" asp-page-handler="Delete" asp-route-id="@Model.Id" onclick="return confirm('Are you sure?')">Delete</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(function () {
+            $('#saveApp').on('click', function () {
+                $('#editAppForm').validate();
+                if (($('#editAppForm').valid() === false)
+                    return false;
+
+                return true;
+            });
+        });
+    </script>
+}
